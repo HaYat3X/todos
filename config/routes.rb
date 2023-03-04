@@ -5,4 +5,7 @@ Rails.application.routes.draw do
 
   get "todos/new", to: "todos#new"
   post "todos/create", to: "todos#create"
+
+  get "todos/edit/:id", to: "todos#edit"
+  patch "todos/update/:id", to: "todos#update"
 end
