@@ -20,6 +20,21 @@ class TodosController < ApplicationController
     end
   end
 
+  # ! タスクを更新するメソッド
+  def edit
+    @todo = Todo.find(:id)
+  end
+
+  # ! タスクを更新するメソッド
+  def update
+    @todo = Todo.find(:id)
+    if @todo.update(todo_params)
+      redirect_to "/"
+    else
+      redirect_to "/"
+    end
+  end
+
   private
 
   def todo_params
