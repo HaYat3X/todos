@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   get "todos/edit/:id", to: "todos#edit"
   patch "todos/update/:id", to: "todos#update"
+
+  delete "todos/destroy/:id", to: "todos#destroy"
 end

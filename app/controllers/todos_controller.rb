@@ -1,4 +1,7 @@
 class TodosController < ApplicationController
+  # ! ログインが必要な処理
+  before_action :authenticate_users!, only: [:index, :new, :create, :edit, :update, :destroy]
+
   # ! タスク一覧を取得するメソッド
   def index
     @todos = Todo.all
@@ -29,6 +32,16 @@ class TodosController < ApplicationController
   def update
     @todo = Todo.find(params[:id])
     if @todo.update(todo_params)
+      redirect_to "/"
+    else
+      redirect_to "/"
+    end
+  end
+
+  # ! タスクを削除するメソッド
+  def destroy
+    @todo = Todo.find(params[:id])
+    if @todo.destroy
       redirect_to "/"
     else
       redirect_to "/"
