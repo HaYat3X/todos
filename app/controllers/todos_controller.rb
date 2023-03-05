@@ -15,34 +15,37 @@ class TodosController < ApplicationController
 
   # ! タスクを新規投稿するメソッド
   def create
-    @todo = Todo.new(todo_params)
-    @todo.user_id = current_user.id
-    @todo.state = nil
-    if @todo.save
-      redirect_to "/"
+    todo = Todo.new(todo_params)
+    todo.user_id = current_user.id
+    todo.state = nil
+
+    if todo.save
+      redirect_to "/todos", notice: "タスクを登録しました。"
     else
-      redirect_to "/"
+      redirect_to "/todos", alert: "タスクの登録に失敗しました。"
     end
   end
 
   # ! タスクを削除するメソッド
   def destroy
-    @todo = Todo.find(params[:id])
-    if @todo.destroy
-      redirect_to "/"
-    else
-      redirect_to "/"
-    end
+    todo = Todo.find(params[:id])
+
+    @todos = Todo.all
+    @todo = Todo.new
+
+    flash.now[:notice] = "タスクを削除しました。"
+    todo.destroy
   end
 
   # ! タスクを完了するメソッド
   def complete
-    @todo = Todo.find(params[:id])
-    if @todo.update(state: 1)
-      redirect_to "/"
-    else
-      redirect_to "/"
-    end
+    todo = Todo.find(params[:id])
+
+    @todos = Todo.all
+    @todo = Todo.new
+
+    flash.now[:notice] = "タスクを完了しました。"
+    todo.update(state: 1)
   end
 
   private
