@@ -1,10 +1,11 @@
 class TodosController < ApplicationController
   # ! ログインが必要な処理
-  before_action :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :new, :create, :complete, :destroy]
 
   # ! タスク一覧を取得するメソッド
   def index
     @todos = Todo.all
+    @todo = Todo.new
   end
 
   # ! タスクを新規投稿するメソッド
@@ -16,22 +17,8 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     @todo.user_id = current_user.id
+    @todo.state = nil
     if @todo.save
-      redirect_to "/"
-    else
-      redirect_to "/"
-    end
-  end
-
-  # ! タスクを更新するメソッド
-  def edit
-    @todo = Todo.find(params[:id])
-  end
-
-  # ! タスクを更新するメソッド
-  def update
-    @todo = Todo.find(params[:id])
-    if @todo.update(todo_params)
       redirect_to "/"
     else
       redirect_to "/"
@@ -42,6 +29,16 @@ class TodosController < ApplicationController
   def destroy
     @todo = Todo.find(params[:id])
     if @todo.destroy
+      redirect_to "/"
+    else
+      redirect_to "/"
+    end
+  end
+
+  # ! タスクを完了するメソッド
+  def complete
+    @todo = Todo.find(params[:id])
+    if @todo.update(state: 1)
       redirect_to "/"
     else
       redirect_to "/"

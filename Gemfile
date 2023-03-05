@@ -5,6 +5,7 @@ ruby "3.1.0"
 
 # 認証機能用のGem
 gem "devise"
+gem 'devise-i18n'
 # mysql
 gem "mysql2"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
