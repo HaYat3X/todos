@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.0"
 
+# 定期実行
+gem 'whenever', require: false
 # 認証機能用のGem
 gem "devise"
 gem 'devise-i18n'
