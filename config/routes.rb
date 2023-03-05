@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # 認証関連のルーティング
+  devise_scope :user do
+    root to: "devise/sessions#new"
+    devise_for :users
+  end
 
   get "todos", to: "todos#index"
 
