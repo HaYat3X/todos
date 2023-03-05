@@ -1,0 +1,8 @@
+<%# ! タスクを削除したら部分テンプレートだけ更新 %>
+$("#todos").html("<%= escape_javascript(render partial: 'todos', locals: {todos: @todos, todo: @todo}) %>");
+<%# ! flashメッセージを非同期 %>
+$("#flash").html("<%= escape_javascript(render partial: 'layouts/flash') %>");
+<%# ! flashメッセージを2秒後に消す %>
+$(function() {
+    setTimeout("$('.alert').fadeOut('slow')", 1000);
+});

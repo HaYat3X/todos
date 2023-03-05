@@ -28,18 +28,18 @@ class TodosController < ApplicationController
 
   # ! タスクを削除するメソッド
   def destroy
-    @todo = Todo.find(params[:id])
-    if @todo.destroy
-      redirect_to "/todos", notice: "タスクを削除しました。"
-    else
-      redirect_to "/todos", alert: "タスクの削除に失敗しました。"
-    end
+    todo = Todo.find(params[:id])
+
+    @todos = Todo.all
+    @todo = Todo.new
+    flash.now[:notice] = "コメントを投稿しました"
+    todo.destroy
   end
 
   # ! タスクを完了するメソッド
   def complete
-    @todo = Todo.find(params[:id])
-    if @todo.update(state: 1)
+    todo = Todo.find(params[:id])
+    if todo.update(state: 1)
       redirect_to "/todos", notice: "タスクを完了しました。"
     else
       redirect_to "/todos", alert: "タスクの完了に失敗しました。"
