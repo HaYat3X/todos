@@ -35,6 +35,16 @@ class TodosController < ApplicationController
     end
   end
 
+  # ! タスクを削除するメソッド
+  def destroy
+    @todo = Todo.find(params[:id])
+    if @todo.destroy
+      redirect_to "/"
+    else
+      redirect_to "/"
+    end
+  end
+
   private
 
   def todo_params
