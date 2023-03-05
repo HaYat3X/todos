@@ -5,6 +5,7 @@ class TodosController < ApplicationController
   # ! タスク一覧を取得するメソッド
   def index
     @todos = Todo.all
+    @todo = Todo.new
   end
 
   # ! タスクを新規投稿するメソッド
