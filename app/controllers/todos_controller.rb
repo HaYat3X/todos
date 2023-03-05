@@ -18,10 +18,11 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
     @todo.user_id = current_user.id
     @todo.state = nil
+
     if @todo.save
-      redirect_to "/"
+      redirect_to "/todos", notice: "タスクを登録しました。"
     else
-      redirect_to "/"
+      redirect_to "/todos", alert: "タスクの登録に失敗しました。"
     end
   end
 
@@ -29,9 +30,9 @@ class TodosController < ApplicationController
   def destroy
     @todo = Todo.find(params[:id])
     if @todo.destroy
-      redirect_to "/"
+      redirect_to "/todos", notice: "タスクを削除しました。"
     else
-      redirect_to "/"
+      redirect_to "/todos", alert: "タスクの削除に失敗しました。"
     end
   end
 
@@ -39,9 +40,9 @@ class TodosController < ApplicationController
   def complete
     @todo = Todo.find(params[:id])
     if @todo.update(state: 1)
-      redirect_to "/"
+      redirect_to "/todos", notice: "タスクを完了しました。"
     else
-      redirect_to "/"
+      redirect_to "/todos", alert: "タスクの完了に失敗しました。"
     end
   end
 
